@@ -145,6 +145,37 @@ for (const token of processor) {
 }
 ```
 
+## Post-processing tokens
+
+If you would like to make more advanced parsing on parsed tokens, you can do it with `addProcessor` method:
+
+```js
+// Load library
+const UniversalLexer = require('universal-lexer')
+
+// Create lexer
+const lexer = UniversalLexer.fromFile('scss.yaml')
+
+// That's 'Literal' definition:
+const Literal = {
+  type: 'Literal',
+  regex: '(?<value>([^\t \n;"'',{}()\[\]#=:~&\\]|(\\.))+)'
+}
+
+// Add processor which will replace all '\X' to 'X' in value
+lexer.addProcessor('Literal', match => {
+  return {
+    value: match.value.replace(/\\(.)/, '$1')
+  }
+})
+
+// Build processor
+const processor = lexer.for('some { background: code }')
+
+// Get all tokens...
+const tokens = processor.process()
+```
+
 ## Debug / Syntax Highlighting
 
 There is additionally `HTML` object extracted into module,
