@@ -165,7 +165,7 @@ const Literal = {
 // Add processor which will replace all '\X' to 'X' in value
 lexer.addProcessor('Literal', match => {
   return {
-    value: match.value.replace(/\\(.)/, '$1')
+    value: match.value.replace(/\\(.)/g, '$1')
   }
 })
 
@@ -212,3 +212,9 @@ For easier work with such code, you can later run it like:
 ```bash
 node debug.js > index.html && open index.html
 ```
+
+## Changelog
+
+- **1.0.3** - add proper sanitization for debug HTML
+- **1.0.2** - small fixes for README file
+- **1.0.1** - added Rollup.js support to build version for browser
