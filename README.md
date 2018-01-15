@@ -86,7 +86,7 @@ Later it may have more advanced stuff like macros (for simpler syntax).
 
 **Example:**
 
-```js
+```yaml
 Tokens:
   # Whitespaces
 
