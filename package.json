@@ -1,7 +1,15 @@
 {
   "name": "universal-lexer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Universal lexer, where you can pass your rules for lexical analytics",
+  "keywords": [
+    "lexer",
+    "universal",
+    "lexical",
+    "analysis",
+    "parser",
+    "expression"
+  ],
   "main": "index.js",
   "scripts": {
     "prepublish": "rollup -c rollup.config.js",
@@ -9,6 +17,13 @@
     "lint": "lint"
   },
   "author": "Dawid Rusnak <dawid@drcode.pl>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rangoo94/universal-lexer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rangoo94/universal-lexer/issues"
+  },
   "license": "MIT",
   "dependencies": {
     "named-js-regexp": "^1.3.3",
