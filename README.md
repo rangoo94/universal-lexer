@@ -19,7 +19,19 @@ Package is available as `universal-lexer` in NPM, so you can use it in your proj
 
 ## What are requirements?
 
-Code itself is written in ES6, but it's transpiled to ES5, so you can use it either in Node.js or in browser.
+Code itself is written in ES6 and should work in Node.js 6+ environment.
+If you would like to use it in browser or older development, there is also transpiled and bundled (UMD) version included.
+You can use `universal-lexer/browser` in you requires or `UniversalLexer` in global environment (in browser):
+
+```js
+// Load library
+const UniversalLexer = require('universal-lexer/browser')
+
+// Create lexer
+const lexer = UniversalLexer.fromDefinitions(definitions)
+
+// ...
+```
 
 ## How it works
 
