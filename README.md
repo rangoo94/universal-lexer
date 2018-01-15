@@ -215,6 +215,7 @@ node debug.js > index.html && open index.html
 
 ## Changelog
 
+- **1.0.4** - bugfix for debugging
 - **1.0.3** - add proper sanitization for debug HTML
 - **1.0.2** - small fixes for README file
 - **1.0.1** - added Rollup.js support to build version for browser
