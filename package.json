@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard",
-    "test": "lint"
+    "lint": "lint"
   },
   "author": "Dawid Rusnak <dawid@drcode.pl>",
   "license": "MIT",
