@@ -61,25 +61,30 @@ const lexer = UniversalLexer.fromDefinitions(definitions)
 A definition is more complex object:
 
 ```js
+// Required fields: 'type' and either `regex` or `value`
 {
-  // Required: Token name
+  // Token name
   type: 'String',
 
-  // Optional: Regular expression to validate
+  // String value which should be searched on beginning on string
+  value: 'abc',
+  value: '(',
+
+  // Regular expression to validate
   // if current token should be parsed as this token
   // Useful i.e. when you require separator after sentence,
   // but you don't want to include it.
   valid: '"',
 
-  // Optional: regular expression flags for 'valid' field
+  // Regular expression flags for 'valid' field
   validFlags: 'i',
 
-  // Required: Regular expression to find current token
+  // Regular expression to find current token
   // You can use named groups as well (?<name>expression):
   // Then it will attach this information to token.
   regex: '"(?<value>([^"]|\\.)+)"',
 
-  // Optional: regular expression flags for 'regex' field
+  // Regular expression flags for 'regex' field
   regexFlags: 'i'
 }
 ```
@@ -103,7 +108,7 @@ Tokens:
   # Whitespaces
 
   - name: NewLine
-    regex: '\n'
+    value: "\n"
 
   - name: Space
     regex: '[ \t]+'
@@ -215,6 +220,8 @@ node debug.js > index.html && open index.html
 
 ## Changelog
 
+
+- **1.0.6** - optimized Lexer performance (20% faster in average)
 - **1.0.5** - fix browser version to be put into NPM package properly
 - **1.0.4** - bugfix for debugging
 - **1.0.3** - add proper sanitization for debug HTML

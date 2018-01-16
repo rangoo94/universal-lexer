@@ -1,6 +1,6 @@
 {
   "name": "universal-lexer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Universal lexer, where you can pass your rules for lexical analytics",
   "keywords": [
     "tokenizer",

@@ -20,7 +20,16 @@ module.exports = {
     babel(babelrc()),
     uglify({
       mangle: {
-        reserved: [ 'Token', 'Lexer', 'LexerProcessor', 'NamedRegExp' ]
+        reserved: [
+          'Token',
+          'Lexer',
+          'TokenDefinition',
+          'SingleCharTokenDefinition',
+          'RegexpTokenDefinition',
+          'ValueTokenDefinition',
+          'LexerProcessor',
+          'NamedRegExp'
+        ]
       }
     })
   ]
