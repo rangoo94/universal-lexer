@@ -220,7 +220,7 @@ node debug.js > index.html && open index.html
 
 ## Changelog
 
-
+- **1.0.7** - optimize definitions with "value", make syntax errors developer-friendly
 - **1.0.6** - optimized Lexer performance (20% faster in average)
 - **1.0.5** - fix browser version to be put into NPM package properly
 - **1.0.4** - bugfix for debugging
