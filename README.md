@@ -21,7 +21,7 @@ Package is available as `universal-lexer` in NPM, so you can use it in your proj
 
 Code itself is written in ES6 and should work in Node.js 6+ environment.
 If you would like to use it in browser or older development, there is also transpiled and bundled (UMD) version included.
-You can use `universal-lexer/browser` in you requires or `UniversalLexer` in global environment (in browser):
+You can use `universal-lexer/browser` in your requires or `UniversalLexer` in global environment (in browser):
 
 ```js
 // Load library
@@ -220,6 +220,7 @@ node debug.js > index.html && open index.html
 
 ## Changelog
 
+- **1.0.8** - change that current position in syntax error starts from 1 always
 - **1.0.7** - optimize definitions with "value", make syntax errors developer-friendly
 - **1.0.6** - optimized Lexer performance (20% faster in average)
 - **1.0.5** - fix browser version to be put into NPM package properly
