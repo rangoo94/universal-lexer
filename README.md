@@ -1,5 +1,10 @@
 # Universal Lexer
 
+[![Travis](https://travis-ci.org/rangoo94/universal-lexer.svg)](https://travis-ci.org/rangoo94/universal-lexer)
+[![Code Climate](https://codeclimate.com/github/rangoo94/universal-lexer/badges/gpa.svg)](https://codeclimate.com/github/rangoo94/universal-lexer)
+[![Coverage Status](https://coveralls.io/repos/github/rangoo94/universal-lexer/badge.svg?branch=master)](https://coveralls.io/github/rangoo94/universal-lexer?branch=master)
+[![NPM Downloads](https://img.shields.io/npm/dm/universal-lexer.svg)](https://www.npmjs.com/package/universal-lexer)
+
 Lexer which can parse any text input to tokens, according to provided regular expressions.
 
 > In computer science, lexical analysis, lexing or tokenization is the process of converting a sequence of characters
