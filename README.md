@@ -126,22 +126,22 @@ Later it may have more advanced stuff like macros (for simpler syntax).
 Tokens:
   # Whitespaces
 
-  - name: NewLine
+  - type: NewLine
     value: "\n"
 
-  - name: Space
+  - type: Space
     regex: '[ \t]+'
 
   # Math
 
-  - name: Operator
+  - type: Operator
     regex: '[+-*/]'
 
   # Color
   # It has 'valid' field, to be sure that it's not i.e. blacker
   # Now, it will check if there is no text after
 
-  - name: Color
+  - type: Color
     regex: '(?<value>black|white)'
     valid: '(black|white)[^\w]'
 ```
@@ -240,6 +240,7 @@ For now, you can see example of JSON semantics in `examples/json.yaml` file.
 
 ### Version 2
 
+- **2.0.1** - fix typo in README file
 - **2.0.0** - optimize it (even 10x faster) by expression analysis and some other things
 
 ### Version 1
