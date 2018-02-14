@@ -1,9 +1,10 @@
-const Lexer = require('./lib/Lexer')
-const buildLexerFromDefinitions = require('./lib/buildLexerFromDefinitions')
-const buildLexerFromFile = require('./lib/buildLexerFromFile')
-const HTML = require('./lib/HTML')
+const buildLexerCode = require('./lib/buildLexerCode')
+const buildLexerCodeFromFile = require('./lib/buildLexerCodeFromFile')
 
-exports.Lexer = Lexer
-exports.fromFile = buildLexerFromFile
-exports.fromDefinitions = buildLexerFromDefinitions
-exports.HTML = HTML
+const compileLexer = require('./lib/compileLexer')
+const compileLexerFromFile = require('./lib/compileLexerFromFile')
+
+exports.build = buildLexerCode
+exports.buildFromFile = buildLexerCodeFromFile
+exports.compile = compileLexer
+exports.compileFromFile = compileLexerFromFile

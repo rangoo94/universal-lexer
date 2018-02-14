@@ -1,0 +1,36 @@
+Tokens:
+  - type: Whitespace
+    regex: '\s+'
+
+  - type: ArrayOpen
+    value: '['
+
+  - type: ArrayClose
+    value: ']'
+
+  - type: ObjectOpen
+    value: '{'
+
+  - type: ObjectClose
+    value: '}'
+
+  - type: Colon
+    value: ':'
+
+  - type: Comma
+    value: ','
+
+  - type: Number
+    regex: '-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?'
+
+  - type: Boolean
+    value: 'false'
+
+  - type: Boolean
+    value: 'true'
+
+  - type: Nil
+    value: 'null'
+
+  - type: String
+    regex: '"(?:[^\\"]|\\(?:[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"'

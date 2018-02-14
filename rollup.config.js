@@ -18,19 +18,6 @@ module.exports = {
       ignore: [ 'conditional-runtime-dependency' ]
     }),
     babel(babelrc()),
-    uglify({
-      mangle: {
-        reserved: [
-          'Token',
-          'Lexer',
-          'TokenDefinition',
-          'SingleCharTokenDefinition',
-          'RegexpTokenDefinition',
-          'ValueTokenDefinition',
-          'LexerProcessor',
-          'NamedRegExp'
-        ]
-      }
-    })
+    uglify()
   ]
 }

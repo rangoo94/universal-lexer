@@ -28,14 +28,28 @@ You can use `universal-lexer/browser` in your requires or `UniversalLexer` in gl
 const UniversalLexer = require('universal-lexer/browser')
 
 // Create lexer
-const lexer = UniversalLexer.fromDefinitions(definitions)
+const lexer = UniversalLexer.compile(definitions)
 
 // ...
 ```
 
 ## How it works
 
-There are two ways of passing rules to this lexer.
+You've got two sets of functions:
+
+```js
+// Load library
+const UniversalLexer = require('universal-lexer')
+
+// Build code for this lexer
+const code1 = UniversalLexer.build([ { type: 'Colon', value: ':' } ])
+const code2 = UniversalLexer.buildFromFile('json.yaml')
+
+// Compile dynamically a function which can be used
+const func1 = UniversalLexer.compile([ { type: 'Colon', value: ':' } ])
+const func2 = UniversalLexer.compileFromFile('json.yaml')
+```
+There are two ways of passing rules to this lexer: from file or array of definitions.
 
 ### Pass as array of definitions
 
@@ -48,14 +62,14 @@ const UniversalLexer = require('universal-lexer')
 // Create token definition
 const Colon = {
   type: 'Colon',
-  regex: ':'
+  value: ':'
 }
 
 // Build array of definitions
 const definitions = [ Colon ]
 
 // Create lexer
-const lexer = UniversalLexer.fromDefinitions(definitions)
+const lexer = UniversalLexer.compile(definitions)
 ```
 
 A definition is more complex object:
@@ -95,7 +109,7 @@ A definition is more complex object:
 // Load library
 const UniversalLexer = require('universal-lexer')
 
-const lexer = UniversalLexer.fromFile('scss.yaml')
+const lexer = UniversalLexer.compileFromFile('scss.yaml')
 ```
 
 YAML file for now should contain only `Tokens` property with definitions.
@@ -136,18 +150,10 @@ Processing input data, after you created a lexer is pretty straight-forward with
 const UniversalLexer = require('universal-lexer')
 
 // Create lexer
-const lexer = UniversalLexer.fromFile('scss.yaml')
+const tokenize = UniversalLexer.compileFromFile('scss.yaml')
 
 // Build processor
-const processor = lexer.for('some { background: code }')
-
-// Get all tokens...
-const tokens = processor.process()
-
-// or iterate over them
-for (const token of processor) {
-  console.log(token)
-}
+const tokens = tokenize('some { background: code }').tokens
 ```
 
 ## Post-processing tokens
@@ -159,7 +165,7 @@ If you would like to make more advanced parsing on parsed tokens, you can do it 
 const UniversalLexer = require('universal-lexer')
 
 // Create lexer
-const lexer = UniversalLexer.fromFile('scss.yaml')
+const tokenize = UniversalLexer.compileFromFile('scss.yaml')
 
 // That's 'Literal' definition:
 const Literal = {
@@ -167,58 +173,71 @@ const Literal = {
   regex: '(?<value>([^\t \n;"'',{}()\[\]#=:~&\\]|(\\.))+)'
 }
 
-// Add processor which will replace all '\X' to 'X' in value
-lexer.addProcessor('Literal', match => {
-  return {
-    value: match.value.replace(/\\(.)/g, '$1')
+// Create processor which will replace all '\X' to 'X' in value
+function process (token) {
+  if (token.type !== 'Literal') {
+    return token
   }
-})
 
-// Build processor
-const processor = lexer.for('some { background: code }')
+  return {
+    type: 'Literal',
+    data: {
+      value: match.value.replace(/\\(.)/g, '$1')
+    },
+    start: token.start,
+    end: token.end
+  }
+}
 
 // Get all tokens...
-const tokens = processor.process()
+const tokens = tokenize('some { background: code }', process).tokens
 ```
 
-## Debug / Syntax Highlighting
+## Beautified code
 
-There is additionally `HTML` object extracted into module,
-which allows rendering HTML code with your tokens.
+If you would like to get beautified code of lexer,
+you can use second argument of `compile` functions:
 
 ```js
-// Load library
-const UniversalLexer = require('universal-lexer')
+UniversalLexer.compile(definitions, true)
+UniversalLexer.compileFromFile('scss.yaml', true)
+```
 
-// Create lexer
-const lexer = UniversalLexer.fromFile('scss.yaml')
+## Possible results
 
-// Get tokens
-const tokens = lexer.for('some { background: code }').process()
+On success you will retrieve simple object with array of tokens:
 
-// Build HTML
-const html = UniversalLexer.HTML.build(tokens, {
-  String: [
-    // You can pass any styling for specific tokens
-    'background: red',
-
-    // There are also few helpers provided:
-    UniversalLexer.HTML.color('blue'),
-    UniversalLexer.HTML.underline,
-    UniversalLexer.HTML.bold
+```js
+{
+  tokens: [
+    { type: 'Whitespace', data: { value: '     ' }, start: 0, end: 5 },
+    { type: 'Word', data: { value: 'some' }, start: 5, end: 9 }
   ]
-})
-
-console.log(html)
+}
 ```
 
-For easier work with such code, you can later run it like:
+When something is wrong you will get error information:
 
-```bash
-node debug.js > index.html && open index.html
+```js
+{
+  error: 'Unrecognized token',
+  index: 1,
+  line: 1,
+  column: 2
+}
 ```
+
+## Examples
+
+For now, you can see example of JSON semantics in `examples/json.yaml` file.
 
 ## Changelog
+
+### Version 2
+
+- **2.0.0** - optimize it (even 10x faster) by expression analysis and some other things
+
+### Version 1
 
 - **1.0.8** - change that current position in syntax error starts from 1 always
 - **1.0.7** - optimize definitions with "value", make syntax errors developer-friendly
