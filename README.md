@@ -236,6 +236,23 @@ When something is wrong you will get error information:
 
 For now, you can see example of JSON semantics in `examples/json.yaml` file.
 
+## CLI
+
+After installing globally (or inside of NPM scripts) `universal-lexer` command is available:
+
+```
+Usage: universal-lexer [options] output.js
+
+Options:
+  --version       Show version number                                  [boolean]
+  -s, --source    Semantics file                                      [required]
+  -b, --beautify  Should beautify code?                [boolean] [default: true]
+  -h, --help      Show help                                            [boolean]
+
+Examples:
+  universal-lexer -s json.yaml lexer.js  build lexer from semantics file
+```
+
 ## Changelog
 
 ### Version 2

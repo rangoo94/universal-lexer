@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const argv = require('yargs')
+    .usage('Usage: $0 [options] output.js')
+    .example('$0 -s json.yaml lexer.js', 'build lexer from semantics file')
+    .alias('s', 'source')
+    .boolean('b')
+    .alias('b', 'beautify')
+    .nargs('s', 1)
+    .default('b', true)
+    .describe('s', 'Semantics file')
+    .describe('b', 'Should beautify code?')
+    .demandOption([ 's' ])
+    .demandCommand(1, 1, 'Missing output file path.')
+    .help('h')
+    .alias('h', 'help')
+    .argv
+
+const fs = require('fs')
+
+const UniversalLexer = require('../index')
+
+fs.writeFileSync(argv._[0], 'module.exports = ' + UniversalLexer.buildFromFile(argv.s, argv.b))
