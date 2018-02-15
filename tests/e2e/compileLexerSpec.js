@@ -63,6 +63,23 @@ describe('E2E: Compile lexer', () => {
     })
   })
 
+  it('should correctly parse with single character definition', () => {
+    const tokenize = compile([
+      { type: 'A', value: 'a' },
+      { type: 'B', value: 'b' }
+    ])
+
+    expect(tokenize('abaab')).to.eql({
+      tokens: [
+        { type: 'A', data: { value: 'a' }, start: 0, end: 1 },
+        { type: 'B', data: { value: 'b' }, start: 1, end: 2 },
+        { type: 'A', data: { value: 'a' }, start: 2, end: 3 },
+        { type: 'A', data: { value: 'a' }, start: 3, end: 4 },
+        { type: 'B', data: { value: 'b' }, start: 4, end: 5 }
+      ]
+    })
+  })
+
   it('should correctly parse with validated regex definition', () => {
     const tokenize = compile([
       { type: 'WS', regex: '[ ]+' },
