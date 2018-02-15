@@ -257,6 +257,7 @@ Examples:
 
 ### Version 2
 
+- **2.0.3** - add unit and E2E tests, fix small bugs
 - **2.0.2** - added CLI command
 - **2.0.1** - fix typo in README file
 - **2.0.0** - optimize it (even 10x faster) by expression analysis and some other things
