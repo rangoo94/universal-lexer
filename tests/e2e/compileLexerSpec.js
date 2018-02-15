@@ -112,4 +112,27 @@ describe('E2E: Compile lexer', () => {
       column: 1
     })
   })
+
+  it('should correctly post-process tokens', () => {
+    const tokenize = compile([
+      { type: 'WS', regex: '[ ]+' },
+      { type: 'FN', value: '@fn' }
+    ])
+
+    const process = token => {
+      if (token.type === 'WS') {
+        token.type = token.data.value.length > 1 ? 'WSLONG': 'WS'
+      }
+
+      return token
+    }
+
+    expect(tokenize('  @fn ', process)).to.eql({
+      tokens: [
+        { type: 'WSLONG', data: { value: '  ' }, start: 0, end: 2 },
+        { type: 'FN', data: { value: '@fn' }, start: 2, end: 5 },
+        { type: 'WS', data: { value: ' ' }, start: 5, end: 6 },
+      ]
+    })
+  })
 })
