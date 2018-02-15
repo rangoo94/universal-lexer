@@ -257,6 +257,7 @@ Examples:
 
 ### Version 2
 
+- **2.0.4** - remove unneeded `benchmark` dependency
 - **2.0.3** - add unit and E2E tests, fix small bugs
 - **2.0.2** - added CLI command
 - **2.0.1** - fix typo in README file
