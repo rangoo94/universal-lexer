@@ -180,6 +180,15 @@ const Literal = {
 
 // Create processor which will replace all '\X' to 'X' in value
 function process (token) {
+  if (token.type === 'Literal') {
+    token.data.value = token.data.value.replace(/\\(.)/g, '$1')
+  }
+
+  return token
+}
+
+// Also, you can return a new token
+function process2 (token) {
   if (token.type !== 'Literal') {
     return token
   }
@@ -187,7 +196,7 @@ function process (token) {
   return {
     type: 'Literal',
     data: {
-      value: match.value.replace(/\\(.)/g, '$1')
+      value: token.data.value.replace(/\\(.)/g, '$1')
     },
     start: token.start,
     end: token.end
